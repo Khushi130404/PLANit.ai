@@ -1,6 +1,7 @@
 package com.planzy.planzyai;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,12 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.razzaghimahdi78.dotsloading.linear.LoadingWavy;
 
 import org.json.JSONException;
@@ -40,6 +43,7 @@ import okio.Okio;
 import okio.Source;
 
 public class ActivityChat extends AppCompatActivity {
+    String API_KEY;
 
     AI_ChatbotAdapter adapter;
     ConstraintLayout main_constraint;
@@ -57,7 +61,6 @@ public class ActivityChat extends AppCompatActivity {
     LoadingWavy typing_indicator;
     ImageView ai_chatbot_back_btn;
 
-    private String API_KEY = "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";
     public static final MediaType JSON
             = MediaType.get("application/json; charset=utf-8");
 
@@ -116,6 +119,21 @@ public class ActivityChat extends AppCompatActivity {
 
             }
         });
+
+        DatabaseReference apiref = FirebaseDatabase.getInstance().getReference("api_key");
+
+        apiref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                API_KEY = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
