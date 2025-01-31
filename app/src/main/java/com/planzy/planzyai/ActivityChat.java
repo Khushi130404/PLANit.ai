@@ -29,7 +29,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -293,6 +298,47 @@ public class ActivityChat extends AppCompatActivity {
                             Float final_price = (float) (((Float.parseFloat(prompt_tokens)/1000)*0.005 + (Float.parseFloat(completion_tokens)/1000)*0.015))*83;
                             System.out.println(final_price);
                             total_price_of_thread += final_price;
+
+//                            if(message.contains(""))
+
+                            // Arrays to store extracted IDs
+                            String[] plan1IDs = new String[3];
+                            String[] plan2IDs = new String[3];
+                            String[] plan3IDs = new String[3];
+
+                            // Variables to store extracted prices
+                            int plan1Price = 0;
+                            int plan2Price = 0;
+                            int plan3Price = 0;
+
+                            // Pattern to extract IDs and Prices
+                            Pattern pattern = Pattern.compile("##PLAN(\\d+)##.*?ID = \\{([^}]*)\\}.*?Price=(\\d+)");
+                            Matcher matcher = pattern.matcher(message);
+
+                            while (matcher.find()) {
+                                int planNumber = Integer.parseInt(matcher.group(1));
+                                String[] ids = matcher.group(2).split(", ");
+                                int price = Integer.parseInt(matcher.group(3));
+
+                                switch (planNumber) {
+                                    case 1:
+                                        plan1IDs = ids;
+                                        plan1Price = price;
+                                        break;
+                                    case 2:
+                                        plan2IDs = ids;
+                                        plan2Price = price;
+                                        break;
+                                    case 3:
+                                        plan3IDs = ids;
+                                        plan3Price = price;
+                                        break;
+                                }
+                            }
+
+                            System.out.println("PLAN 1: IDs = " + Arrays.toString(plan1IDs) + ", Price = " + plan1Price);
+                            System.out.println("PLAN 2: IDs = " + Arrays.toString(plan2IDs) + ", Price = " + plan2Price);
+                            System.out.println("PLAN 3: IDs = " + Arrays.toString(plan3IDs) + ", Price = " + plan3Price);
 
                             if(status.equals("completed")){
                                 chat_array.add(new AI_chatbot_model(true, message, "Planit.ai", true));

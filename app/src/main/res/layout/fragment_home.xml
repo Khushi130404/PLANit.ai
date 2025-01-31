@@ -70,16 +70,25 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0sp"
                 app:cardCornerRadius="20sp"
+                android:background="@drawable/home_image_1"
                 android:layout_marginRight="20sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 >
 
                 <ImageView
-                    android:background="@drawable/home_image_1"
+                    android:src="@drawable/home_image_1"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     ></ImageView>
+
+                <FrameLayout
+                    android:background="@drawable/h1_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    ></FrameLayout>
+
 
             </androidx.cardview.widget.CardView>
 
