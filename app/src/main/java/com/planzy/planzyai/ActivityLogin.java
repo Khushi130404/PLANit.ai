@@ -103,7 +103,6 @@ public class ActivityLogin extends AppCompatActivity {
 
                 SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
                 String idToken = credential.getGoogleIdToken();
-                DatabaseReference userreference = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid());
                 if (idToken !=  null) {
                     // Got an ID token from Google. Use it to authenticate
                     // with Firebase.
@@ -113,7 +112,8 @@ public class ActivityLogin extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        userreference.child("Name").setValue(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                                        DatabaseReference userreference = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid());
+                                        userreference.child("name").setValue(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                                         Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
                                         startActivity(intent);
                                         ActivityLogin.this.finish();
