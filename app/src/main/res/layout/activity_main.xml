@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/white"
     android:weightSum="12"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:layout_weight="3"
         android:src="@drawable/logo"
         android:layout_width="0sp"
-        android:padding="10sp"
+        android:padding="15sp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +44,11 @@
 
 </LinearLayout>
 
+    <View
+        android:background="#DDE6ED"
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        ></View>
 
     <FrameLayout
         android:id="@+id/fragment"
@@ -50,6 +56,12 @@
         android:layout_height="0sp"
         android:layout_weight="10"
         ></FrameLayout>
+
+    <View
+        android:background="#DDE6ED"
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        ></View>
 
     <LinearLayout
         android:orientation="vertical"

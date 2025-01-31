@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="#eef1f5"
     android:fitsSystemWindows="true"
     android:windowSoftInputMode="adjustResize"
     tools:context=".ActivityChat">
@@ -110,9 +111,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <ImageView
+            android:src="@drawable/enter"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:padding="15dp" />
+            android:padding="18dp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -142,10 +144,7 @@
         android:paddingEnd="20dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="20dp"
-
         app:layout_constraintStart_toEndOf="@id/ai_chatbot_typing_image"
         app:layout_constraintBottom_toTopOf="@id/ai_chatbot_bottomcard"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
