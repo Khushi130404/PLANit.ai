@@ -51,12 +51,16 @@
         android:layout_weight="10"
         ></FrameLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:padding="8sp"
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:layout_weight="1">
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -64,12 +68,21 @@
             >
 
             <ImageView
+                android:padding="10sp"
+                android:src="@drawable/home_icon"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></ImageView>
+
+            <ImageView
+                android:padding="10sp"
+                android:src="@drawable/browser"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 ></ImageView>
 
         </LinearLayout>
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+    </LinearLayout>
 </LinearLayout>
