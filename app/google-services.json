@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "149935574804",
+    "firebase_url": "https://planit-a83b4-default-rtdb.firebaseio.com",
     "project_id": "planit-a83b4",
     "storage_bucket": "planit-a83b4.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.planzy.planzyai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "149935574804-10t569ksuc4per79vgfjnp80pp7f2hgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.planzy.planzyai",
+            "certificate_hash": "cc0b1654b7f81ff236559320fcac39a43cd6d387"
+          }
+        },
+        {
+          "client_id": "149935574804-vrhqio35bqet4kch1lv4240re3u37rma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBt1B2SZxlXauye-xf0YUmihpYb4kdWgK8"
@@ -20,7 +34,41 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149935574804-vrhqio35bqet4kch1lv4240re3u37rma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149935574804:android:8277e2251ba35fd50abc01",
+        "android_client_info": {
+          "package_name": "com.planzy.planzyfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149935574804-vrhqio35bqet4kch1lv4240re3u37rma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt1B2SZxlXauye-xf0YUmihpYb4kdWgK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149935574804-vrhqio35bqet4kch1lv4240re3u37rma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
