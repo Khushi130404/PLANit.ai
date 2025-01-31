@@ -96,7 +96,6 @@ public class ActivityLogin extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("RESULT CODE IS: " + resultCode);
         if (resultCode == LOGIN_CLOSED){
-            System.out.println("Login window closed");
         }
         else if (requestCode == REQ_ONE_TAP){
             Toast.makeText(ActivityLogin.this, "DONE!", Toast.LENGTH_SHORT).show();
