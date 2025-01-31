@@ -194,7 +194,13 @@ public class ActivityChat extends AppCompatActivity {
 
         try {
             message_to_add.put("role", "user");
-            message_to_add.put("content", user_message);
+            message_to_add.put("content", user_message + " \n\nWhen you have all the information just say that leave on up to me dont tell the user the whole plan in detail and give the answer it in this format only:\n" +
+                    "\n" +
+                    "##PLAN1##Done##ID = {List of key id of services you recommend from the database}.\"  + Done2##Price=total price. \n" +
+                    "\n" +
+                    "##PLAN2##Done##ID = {List of key id of services you recommend from the database}.\"  + Done2##Price=total price. \n" +
+                    "\n" +
+                    "Dont change the format. and give 3 plans");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -232,7 +238,7 @@ public class ActivityChat extends AppCompatActivity {
                 Request get_response_request = new Request.Builder()
                         .url("https://api.openai.com/v1/threads/" + thread_id + "/runs")
                         .header("Content-type", "application/json")
-                        .header("Authorization", "Bearer "+API_KEY)
+                        .header("Authorization", "Bearer "+ API_KEY)
                         .header("OpenAI-Beta", "assistants=v2")
                         .post(get_response_body)
                         .build();
