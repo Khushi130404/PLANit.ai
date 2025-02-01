@@ -341,7 +341,7 @@ public class ActivityChat extends AppCompatActivity {
                             System.out.println(final_price);
                             total_price_of_thread += final_price;
 
-                            if (message.contains("##PLAN1##")) {
+                            if (message.contains("##")) {
                                 // Pattern to extract IDs and Prices
                                 Pattern pattern = Pattern.compile("##PLAN(\\d+)##.*?ID = \\{([^}]*)\\}.*?Price=(\\d+)");
                                 Matcher matcher = pattern.matcher(message);
