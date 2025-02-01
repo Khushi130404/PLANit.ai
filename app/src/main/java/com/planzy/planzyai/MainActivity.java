@@ -29,18 +29,15 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent intent = new Intent(MainActivity.this, PaymentDetailsActivity.class);
-            startActivity(intent);
+        frameLayout = findViewById(R.id.fragment);
 
-//        frameLayout = findViewById(R.id.fragment);
-//
-//        if(FirebaseAuth.getInstance().getUid() == null){
-//            Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
-//            startActivity(intent);
-//            MainActivity.this.finish();
-//        }
-//
-//        loadFragment(new HomeFragment());
+        if(FirebaseAuth.getInstance().getUid() == null){
+            Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
+            startActivity(intent);
+            MainActivity.this.finish();
+        }
+
+        loadFragment(new HomeFragment());
     }
 
     void loadFragment(Fragment new_fragment)
