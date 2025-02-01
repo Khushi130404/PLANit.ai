@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:weightSum="6.8"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="0.8"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/imgCancel"
+                android:layout_width="0sp"
+                android:layout_marginLeft="20sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="12sp"
+                android:src="@drawable/cancel_button"
+                />
+
+
+
+            <TextView
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:text="Payment Details"
+                android:paddingLeft="20sp"
+                android:gravity="center|start"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:background="#DDE6ED"
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        ></View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:paddingTop="60sp"
+        android:paddingBottom="0sp"
+        android:paddingHorizontal="25sp"
+        android:layout_weight="4"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="20sp"
+            app:cardElevation="0dp"
+            >
+
+            <LinearLayout
+
+                android:layout_width="349dp"
+                android:layout_height="367dp"
+                android:background="@drawable/edittext_box"
+                android:orientation="vertical"
+                android:padding="20sp"
+                android:layout_gravity="center"
+                android:weightSum="10"
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Payment Total"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:paddingTop="8sp"
+                    android:text="1200rs"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_margin="5sp"
+                    android:layout_weight="7"
+                    android:orientation="vertical"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="20sp"
+                    android:weightSum="7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Name"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="Username"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Name"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="Name"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Name"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="Name"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5sp"
+                            android:layout_weight="1"
+                            android:background="@android:color/darker_gray" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="Total Payment"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="1000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Tax"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="200"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0sp"
+                        android:layout_margin="5sp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Total"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="end"
+                            android:text="1200"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:paddingVertical="10sp"
+        android:paddingHorizontal="40sp"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:id="@+id/confirmPayment"
+            android:background="@drawable/success_button"
+            android:layout_marginBottom="10sp"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Confirm Payment"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            ></Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:paddingHorizontal="50sp"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="60sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Cancel Payment"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:background="@drawable/cancel_button_radius"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="top"
+            />
+    </LinearLayout>
+
+</LinearLayout>
