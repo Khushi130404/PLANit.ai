@@ -22,14 +22,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class PlanViewAdapter extends RecyclerView.Adapter<PlanViewAdapter.ViewHolder>{
     Context context;
     ArrayList<ModelPlanView> array_plans;
+    ArrayList<String> pricearray;
     public PlanViewAdapter(Context context, ArrayList<ModelPlanView> array_plans) {
         this.context = context;
         this.array_plans = array_plans;
+        pricearray = new ArrayList<>();
+        pricearray.add("1000");
+        pricearray.add("5000");
+        pricearray.add("15000");
+        pricearray.add("49999");
+        pricearray.add("25000");
+        pricearray.add("19976");
+        pricearray.add("2500");
+        pricearray.add("89000");
+
+
     }
 
     @NonNull
@@ -42,8 +55,9 @@ public class PlanViewAdapter extends RecyclerView.Adapter<PlanViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int price = array_plans.get(holder.getAdapterPosition()).getPrice();
-        holder.price.setText("test");
+
+        Random random = new Random();
+        holder.price.setText(pricearray.get(random.nextInt(pricearray.size())));
         ArrayList<String> temp = array_plans.get(holder.getAdapterPosition()).getIncludedlist();
         holder.text1.setText(temp.get(0));
         holder.text2.setText(temp.get(1));
