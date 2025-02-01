@@ -17,6 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/indi_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/back1"
+            android:scaleType="centerCrop"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/h1_box"
+            />
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +57,7 @@
             android:layout_height="wrap_content"
             android:text="2000inr"
             android:textSize="35dp"
+            android:textColor="@color/white"
             android:layout_margin="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -57,6 +69,7 @@
             android:layout_height="wrap_content"
             android:text="FIRST TEXT"
             android:textSize="15dp"
+            android:textColor="@color/white"
             android:layout_margin="15dp"
             app:layout_constraintStart_toStartOf="@id/indi_price"
             app:layout_constraintBottom_toTopOf="@id/indi_price"/>
@@ -66,6 +79,7 @@
             android:layout_height="wrap_content"
             android:text="FIRST TEXT"
             android:textSize="15dp"
+            android:textColor="@color/white"
             android:layout_margin="15dp"
             app:layout_constraintStart_toStartOf="@id/indi_price"
             app:layout_constraintBottom_toTopOf="@id/indi_text1"/>
@@ -74,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="FIRST TEXT"
+            android:textColor="@color/white"
             android:textSize="15dp"
             android:layout_margin="15dp"
             app:layout_constraintStart_toStartOf="@id/indi_price"
@@ -85,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:text="Choose"
+            android:backgroundTint="#007700"
             app:icon="@drawable/check_circle_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/indi_price"

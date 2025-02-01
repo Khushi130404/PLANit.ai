@@ -27,7 +27,7 @@
         android:layout_weight="3"
         android:src="@drawable/logo"
         android:layout_width="0sp"
-        android:padding="15sp"
+        android:padding="20dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,19 +76,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="2"
+            android:weightSum="3"
             >
 
             <ImageView
-                android:padding="10sp"
+                android:padding="15dp"
                 android:src="@drawable/home_icon"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></ImageView>
+            <ImageView
+                android:padding="15dp"
+                android:src="@drawable/heart_24"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 ></ImageView>
 
             <ImageView
-                android:padding="10sp"
+                android:padding="15dp"
+                android:src="@drawable/browser"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                ></ImageView>
+
+            <ImageView
+                android:padding="15dp"
                 android:src="@drawable/browser"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"

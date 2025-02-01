@@ -6,10 +6,12 @@ public class ModelPlanView {
     int price;
     ArrayList<String> includedlist;
     String[] id_of_services;
+    int img;
 
-    public ModelPlanView(int price, ArrayList<String> includedlist, String[] id_of_services) {
+    public ModelPlanView(int price, ArrayList<String> includedlist, String[] id_of_services, int img) {
         this.price = price;
         this.includedlist = includedlist;
+        this.img = img;
         this.id_of_services = id_of_services;
     }
 

@@ -456,9 +456,9 @@ public class ActivityChat extends AppCompatActivity {
                 plan2Price = 5000;
                 plan3Price = 10000;
                 planViewArrayList.clear();
-                planViewArrayList.add(new ModelPlanView(plan1Price, plan1tosend, plan1IDs));
-                planViewArrayList.add(new ModelPlanView(plan2Price, plan2tosend, plan2IDs));
-                planViewArrayList.add(new ModelPlanView(plan3Price, plan3tosend, plan3IDs));
+                planViewArrayList.add(new ModelPlanView(plan1Price, plan1tosend, plan1IDs, R.drawable.back1));
+                planViewArrayList.add(new ModelPlanView(plan2Price, plan2tosend, plan2IDs, R.drawable.back2));
+                planViewArrayList.add(new ModelPlanView(plan3Price, plan3tosend, plan3IDs, R.drawable.back3));
                 planviewadapter.notifyDataSetChanged();
                 planviewRecycler.setVisibility(View.VISIBLE);
                     }

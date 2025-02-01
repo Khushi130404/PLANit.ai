@@ -55,14 +55,13 @@ public class PlanViewAdapter extends RecyclerView.Adapter<PlanViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         Random random = new Random();
         holder.price.setText(pricearray.get(random.nextInt(pricearray.size())));
         ArrayList<String> temp = array_plans.get(holder.getAdapterPosition()).getIncludedlist();
         holder.text1.setText(temp.get(0));
         holder.text2.setText(temp.get(1));
         holder.text3.setText(temp.get(2));
-
+        holder.backimg.setImageResource(array_plans.get(holder.getAdapterPosition()).img);
     }
 
     @Override
@@ -73,9 +72,11 @@ public class PlanViewAdapter extends RecyclerView.Adapter<PlanViewAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView price, text1, text2, text3;
         MaterialButton button;
+        ImageView backimg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            backimg = itemView.findViewById(R.id.indi_image);
             price = itemView.findViewById(R.id.indi_price);
             button = itemView.findViewById(R.id.indi_choosebtn);
             text1 = itemView.findViewById(R.id.indi_text1);
