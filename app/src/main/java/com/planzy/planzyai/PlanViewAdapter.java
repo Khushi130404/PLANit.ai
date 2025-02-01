@@ -83,6 +83,16 @@ public class PlanViewAdapter extends RecyclerView.Adapter<PlanViewAdapter.ViewHo
             text2 = itemView.findViewById(R.id.indi_text2);
             text3 = itemView.findViewById(R.id.indi_text3);
 
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(itemView.getContext(), PaymentDetailsActivity.class);
+                    intent.putExtra("price", price.getText().toString());
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
         }
     }
 }

@@ -95,12 +95,13 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="0sp"
                     android:layout_weight="2"
                     android:gravity="center"
                     android:paddingTop="8sp"
-                    android:text="1200rs"
+                    android:text="Rs. 1200"
                     android:textSize="40sp"
                     android:textStyle="bold" />
 
@@ -139,7 +140,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:gravity="end"
-                            android:text="Username"
+                            android:text="Khushi Patel"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -157,7 +158,7 @@
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Name"
+                            android:text="Date"
                             android:textSize="16sp" />
 
                         <TextView
@@ -166,6 +167,7 @@
                             android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/tvDate"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -188,7 +190,7 @@
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Name"
+                            android:text="Time"
                             android:textSize="16sp" />
 
                         <TextView
@@ -197,6 +199,7 @@
                             android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/tvTime"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -239,6 +242,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv1"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -270,6 +274,7 @@
                             android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/tv2"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
@@ -301,6 +306,7 @@
                             android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/tv3"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
