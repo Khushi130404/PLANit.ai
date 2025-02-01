@@ -163,6 +163,22 @@ public class ActivityChat extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 API_KEY = snapshot.getValue(String.class);
+                String type = getIntent().getStringExtra("Type");
+                if(Objects.equals(type, "W")){
+                    editText.setText("Let's get started and create a wedding plan!");
+                    send_btn.callOnClick();
+                } else if (Objects.equals(type, "F")) {
+                    editText.setText("Let's get started and create a freshers plan!");
+                    send_btn.callOnClick();
+                } else if (Objects.equals(type, "B")) {
+                    editText.setText("Let's get started and create a birthday plan!");
+                    send_btn.callOnClick();
+                }
+                else{
+                    editText.setText("Let's get started and create plans!");
+                    send_btn.callOnClick();
+                }
+
             }
 
             @Override
@@ -230,11 +246,9 @@ public class ActivityChat extends AppCompatActivity {
 
         try {
             message_to_add.put("role", "user");
-            message_to_add.put("content", user_message + " \n\nWhen you have all the information, make an event from the attached file and give the answer it in this format only:\n" +
+            message_to_add.put("content", user_message + " \n\nWhen you have all the information, make an event from the attached file. Till then keep asking questions in a genz way. give the answer it in this format only:\n" +
                     "\n" +
-                    "##PLAN1##Done##ID = {List of keyid of services needed from the database}.\"  + Done2##Price=total price. \n" +
-                    "\n" +
-                    "Dont change the final format and give 3 plans");
+                    "##PLAN1##Done##ID = {List of keyid of services needed from the database}.\"");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -327,7 +341,6 @@ public class ActivityChat extends AppCompatActivity {
                             System.out.println(final_price);
                             total_price_of_thread += final_price;
 
-
                             if (message.contains("##PLAN1##")) {
                                 // Pattern to extract IDs and Prices
                                 Pattern pattern = Pattern.compile("##PLAN(\\d+)##.*?ID = \\{([^}]*)\\}.*?Price=(\\d+)");
@@ -339,9 +352,22 @@ public class ActivityChat extends AppCompatActivity {
                                     int price = Integer.parseInt(matcher.group(3));
 
                                 }
+                                chat_array.add(new AI_chatbot_model(true, "Here are the plans i've curated for you!", "Planit.ai", true));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+//                                        Toast.makeText(AI_ChatbotActivity.this, "TOTAL PRICE: " + total_price_of_thread.toString(), Toast.LENGTH_LONG).show();
+                                        adapter.notifyItemInserted(chat_array.size() - 1);
+                                        recyclerView.scrollToPosition(chat_array.size() - 1);
+                                        typing_indicator.setVisibility(View.GONE);
+                                        loading_dots_image.setVisibility(View.GONE);
+                                    }
+
+                                });
 
                                 addplans();
                             }
+                            else{
                             if (status.equals("completed")) {
                                 chat_array.add(new AI_chatbot_model(true, message, "Planit.ai", true));
                                 runOnUiThread(new Runnable() {
@@ -355,6 +381,7 @@ public class ActivityChat extends AppCompatActivity {
                                     }
 
                                 });
+                            }
                             }
 
                         } catch (JSONException e) {

@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         app:cardCornerRadius="15dp"
         android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,10 @@
                     android:layout_height="wrap_content"
                     android:text="Recommended"
                     android:textSize="10dp"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
