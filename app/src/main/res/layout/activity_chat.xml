@@ -146,6 +146,17 @@
         app:layout_constraintStart_toEndOf="@id/ai_chatbot_typing_image"
         app:layout_constraintBottom_toTopOf="@id/ai_chatbot_bottomcard"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/planview_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ai_chatbot_bottomcard"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

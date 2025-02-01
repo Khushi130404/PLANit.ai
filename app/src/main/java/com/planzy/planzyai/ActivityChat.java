@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,12 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.razzaghimahdi78.dotsloading.linear.LoadingWavy;
 
@@ -31,6 +35,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -49,13 +55,21 @@ import okio.Source;
 
 public class ActivityChat extends AppCompatActivity {
     String API_KEY;
+    // Arrays to store extracted IDs
 
+
+
+
+    // Variables to store extracted prices
+    int plan1Price = 0;
+    int plan2Price = 0;
+    int plan3Price = 0;
     AI_ChatbotAdapter adapter;
     ConstraintLayout main_constraint;
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     OkHttpClient client;
     ArrayList<AI_chatbot_model> chat_array = new ArrayList<>();
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, planviewRecycler;
     CardView send_btn, loading_dots_image;
     EditText editText;
     TextView ai_chatbot_name;
@@ -65,6 +79,13 @@ public class ActivityChat extends AppCompatActivity {
     //LoadingDots typing_indicator;
     LoadingWavy typing_indicator;
     ImageView ai_chatbot_back_btn;
+    PlanViewAdapter planviewadapter;
+    ArrayList<ModelPlanView> planViewArrayList = new ArrayList<>();
+
+    ArrayList<String> plan1tosend = new ArrayList<>();
+    ArrayList<String> plan2tosend = new ArrayList<>();
+    ArrayList<String> plan3tosend = new ArrayList<>();
+
 
     public static final MediaType JSON
             = MediaType.get("application/json; charset=utf-8");
@@ -85,12 +106,24 @@ public class ActivityChat extends AppCompatActivity {
         typing_indicator.setVisibility(View.GONE);
         loading_dots_image.setVisibility(View.GONE);
         ai_chatbot_back_btn = findViewById(R.id.ai_chatbot_back_btn);
+        planviewRecycler = findViewById(R.id.planview_recycler);
 
+        planviewadapter = new PlanViewAdapter(this, planViewArrayList);
         adapter = new AI_ChatbotAdapter(this, chat_array);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
+        LinearLayoutManager planviewmanager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         manager.setStackFromEnd(true);
+
+        planviewRecycler.setLayoutManager(planviewmanager);
+        planviewRecycler.setAdapter(planviewadapter);
+
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(planviewRecycler);
 
         builder.connectTimeout(1, TimeUnit.MINUTES);
         builder.callTimeout(1, TimeUnit.MINUTES);
@@ -111,10 +144,9 @@ public class ActivityChat extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isblank(s.toString())){
+                if (isblank(s.toString())) {
                     send_btn.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     send_btn.setVisibility(View.VISIBLE);
                 }
             }
@@ -151,12 +183,12 @@ public class ActivityChat extends AppCompatActivity {
                 loading_dots_image.setVisibility(View.VISIBLE);
 
 
-                if(thread_id == null) {
+                if (thread_id == null) {
                     RequestBody create_thread_body = RequestBody.create("", JSON);
                     Request create_thread_request = new Request.Builder()
                             .url("https://api.openai.com/v1/threads")
                             .header("Content-type", "application/json")
-                            .header("Authorization", "Bearer "+API_KEY)
+                            .header("Authorization", "Bearer " + API_KEY)
                             .header("OpenAI-Beta", "assistants=v2")
                             .post(create_thread_body)
                             .build();
@@ -184,8 +216,7 @@ public class ActivityChat extends AppCompatActivity {
                             generate_response();
                         }
                     });
-                }
-                else{
+                } else {
                     generate_response();
                 }
 
@@ -199,13 +230,11 @@ public class ActivityChat extends AppCompatActivity {
 
         try {
             message_to_add.put("role", "user");
-            message_to_add.put("content", user_message + " \n\nWhen you have all the information just say that leave on up to me dont tell the user the whole plan in detail and give the answer it in this format only:\n" +
+            message_to_add.put("content", user_message + " \n\nWhen you have all the information, make an event from the attached file and give the answer it in this format only:\n" +
                     "\n" +
-                    "##PLAN1##Done##ID = {List of key id of services you recommend from the database}.\"  + Done2##Price=total price. \n" +
+                    "##PLAN1##Done##ID = {List of keyid of services needed from the database}.\"  + Done2##Price=total price. \n" +
                     "\n" +
-                    "##PLAN2##Done##ID = {List of key id of services you recommend from the database}.\"  + Done2##Price=total price. \n" +
-                    "\n" +
-                    "Dont change the format. and give 3 plans");
+                    "Dont change the final format and give 3 plans");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -213,7 +242,7 @@ public class ActivityChat extends AppCompatActivity {
         Request add_message_to_thread_request = new Request.Builder()
                 .url("https://api.openai.com/v1/threads/" + thread_id + "/messages")
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer "+API_KEY)
+                .header("Authorization", "Bearer " + API_KEY)
                 .header("OpenAI-Beta", "assistants=v2")
                 .post(add_message_to_thread_body)
                 .build();
@@ -243,7 +272,7 @@ public class ActivityChat extends AppCompatActivity {
                 Request get_response_request = new Request.Builder()
                         .url("https://api.openai.com/v1/threads/" + thread_id + "/runs")
                         .header("Content-type", "application/json")
-                        .header("Authorization", "Bearer "+ API_KEY)
+                        .header("Authorization", "Bearer " + API_KEY)
                         .header("OpenAI-Beta", "assistants=v2")
                         .post(get_response_body)
                         .build();
@@ -263,14 +292,13 @@ public class ActivityChat extends AppCompatActivity {
                         String line, old_line = "{\"nothing\":\"nothing\"}", tokens = null;
 
                         while ((line = bufferedSource.readUtf8Line()) != null) {
-                            if (line.contains("\"object\":\"thread.message\"")){
+                            if (line.contains("\"object\":\"thread.message\"")) {
                                 old_line = line;
                                 System.out.println(line);
-                            }
-                            else{
+                            } else {
                                 System.out.println(line);
                             }
-                            if (line.contains("\"completion_tokens\"") && line.contains("\"prompt_tokens\"")){
+                            if (line.contains("\"completion_tokens\"") && line.contains("\"prompt_tokens\"")) {
                                 tokens = line;
 
                             }
@@ -295,52 +323,26 @@ public class ActivityChat extends AppCompatActivity {
                             System.out.println(thread_id);
                             System.out.println(prompt_tokens);
                             System.out.println(completion_tokens);
-                            Float final_price = (float) (((Float.parseFloat(prompt_tokens)/1000)*0.005 + (Float.parseFloat(completion_tokens)/1000)*0.015))*83;
+                            Float final_price = (float) (((Float.parseFloat(prompt_tokens) / 1000) * 0.005 + (Float.parseFloat(completion_tokens) / 1000) * 0.015)) * 83;
                             System.out.println(final_price);
                             total_price_of_thread += final_price;
 
-//                            if(message.contains(""))
 
-                            // Arrays to store extracted IDs
-                            String[] plan1IDs = new String[3];
-                            String[] plan2IDs = new String[3];
-                            String[] plan3IDs = new String[3];
+                            if (message.contains("##PLAN1##")) {
+                                // Pattern to extract IDs and Prices
+                                Pattern pattern = Pattern.compile("##PLAN(\\d+)##.*?ID = \\{([^}]*)\\}.*?Price=(\\d+)");
+                                Matcher matcher = pattern.matcher(message);
 
-                            // Variables to store extracted prices
-                            int plan1Price = 0;
-                            int plan2Price = 0;
-                            int plan3Price = 0;
+                                while (matcher.find()) {
+                                    int planNumber = Integer.parseInt(matcher.group(1));
+                                    String[] ids = matcher.group(2).split(", ");
+                                    int price = Integer.parseInt(matcher.group(3));
 
-                            // Pattern to extract IDs and Prices
-                            Pattern pattern = Pattern.compile("##PLAN(\\d+)##.*?ID = \\{([^}]*)\\}.*?Price=(\\d+)");
-                            Matcher matcher = pattern.matcher(message);
-
-                            while (matcher.find()) {
-                                int planNumber = Integer.parseInt(matcher.group(1));
-                                String[] ids = matcher.group(2).split(", ");
-                                int price = Integer.parseInt(matcher.group(3));
-
-                                switch (planNumber) {
-                                    case 1:
-                                        plan1IDs = ids;
-                                        plan1Price = price;
-                                        break;
-                                    case 2:
-                                        plan2IDs = ids;
-                                        plan2Price = price;
-                                        break;
-                                    case 3:
-                                        plan3IDs = ids;
-                                        plan3Price = price;
-                                        break;
                                 }
+
+                                addplans();
                             }
-
-                            System.out.println("PLAN 1: IDs = " + Arrays.toString(plan1IDs) + ", Price = " + plan1Price);
-                            System.out.println("PLAN 2: IDs = " + Arrays.toString(plan2IDs) + ", Price = " + plan2Price);
-                            System.out.println("PLAN 3: IDs = " + Arrays.toString(plan3IDs) + ", Price = " + plan3Price);
-
-                            if(status.equals("completed")){
+                            if (status.equals("completed")) {
                                 chat_array.add(new AI_chatbot_model(true, message, "Planit.ai", true));
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -355,26 +357,88 @@ public class ActivityChat extends AppCompatActivity {
                                 });
                             }
 
-                        }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
                     }
                 });
 
 
-
             }
         });
     }
+
     private boolean isblank(String toString) {
-        for(int i = 0; i < toString.length(); i++){
-            if(toString.charAt(i) == ' '){
-            }
-            else{
+        for (int i = 0; i < toString.length(); i++) {
+            if (toString.charAt(i) == ' ') {
+            } else {
                 return false;
             }
         }
         return true;
+    }
+
+    private void addplans() {
+        System.out.println("ADD PLANS");
+        ArrayList<String> venuearray = new ArrayList<>();
+        ArrayList<String> cateringearray = new ArrayList<>();
+        ArrayList<String> musicarray = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Services");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.child("Venue").getChildren()){
+                    venuearray.add(ds.getKey());
+                }
+                for(DataSnapshot ds : snapshot.child("Catering").getChildren()){
+                    cateringearray.add(ds.getKey());
+                }
+                for(DataSnapshot ds : snapshot.child("Music").getChildren()){
+                    musicarray.add(ds.getKey());
+                }
+                Random random = new Random();
+                String key1= venuearray.get(random.nextInt(venuearray.size()));
+                String key2= venuearray.get(random.nextInt(venuearray.size()));
+                String key3= venuearray.get(random.nextInt(venuearray.size()));
+
+                String cat1= cateringearray.get(random.nextInt(cateringearray.size()));
+                String cat2= cateringearray.get(random.nextInt(cateringearray.size()));
+                String cat3= cateringearray.get(random.nextInt(cateringearray.size()));
+
+                String mus1= musicarray.get(random.nextInt(musicarray.size()));
+                String mus2= musicarray.get(random.nextInt(musicarray.size()));
+                String mus3= musicarray.get(random.nextInt(musicarray.size()));
+
+                plan1tosend.add("Venue"+ ": " + snapshot.child("Venue").child(key1).child("name").getValue(String.class));
+                plan2tosend.add("Venue"+ ": " + snapshot.child("Venue").child(key2).child("name").getValue(String.class));
+                plan3tosend.add("Venue"+ ": " + snapshot.child("Venue").child(key3).child("name").getValue(String.class));
+                plan1tosend.add("Catering"+ ": " + snapshot.child("Catering").child(cat1).child("name").getValue(String.class));
+                plan2tosend.add("Catering"+ ": " + snapshot.child("Catering").child(cat2).child("name").getValue(String.class));
+                plan3tosend.add("Catering"+ ": " + snapshot.child("Catering").child(cat3).child("name").getValue(String.class));
+                plan1tosend.add("Music"+ ": " + snapshot.child("Music").child(mus1).child("name").getValue(String.class));
+                plan2tosend.add("Music"+ ": " + snapshot.child("Music").child(mus2).child("name").getValue(String.class));
+                plan3tosend.add("Music"+ ": " + snapshot.child("Music").child(mus3).child("name").getValue(String.class));
+
+
+                String[] plan1IDs = {key1, key2, key3};
+                String[] plan2IDs = {cat1, cat2, cat3};
+                String[] plan3IDs = {mus1, mus2, mus3};
+
+
+                plan1Price = 2000;
+                plan2Price = 5000;
+                plan3Price = 10000;
+                planViewArrayList.clear();
+                planViewArrayList.add(new ModelPlanView(plan1Price, plan1tosend, plan1IDs));
+                planViewArrayList.add(new ModelPlanView(plan2Price, plan2tosend, plan2IDs));
+                planViewArrayList.add(new ModelPlanView(plan3Price, plan3tosend, plan3IDs));
+                planviewadapter.notifyDataSetChanged();
+                planviewRecycler.setVisibility(View.VISIBLE);
+                    }
+                @Override
+                public void onCancelled (@NonNull DatabaseError error){
+                }
+
+        });
     }
 }
