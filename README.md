@@ -24,3 +24,13 @@ PLANit.ai is an intelligent event-planning application developed in Android Stud
 - AI & Chatbot: OpenAI, Retrieval-Augmented Generation (RAG)
 
 - Backend: Firebase (Realtime Database, Authentication, Cloud Functions)
+
+## Future Enhancements
+
+- Additional payment gateways will be integrated with Razor Pay.
+
+- Enhanced chatbot capabilities for personalized event recommendations.
+
+- User profile management and event history tracking.
+
+- Collaboration feature for multiple users to plan an event together.
