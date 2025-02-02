@@ -15,3 +15,12 @@ PLANit.ai is an intelligent event-planning application developed in Android Stud
 - Bill Page: View detailed cost breakdowns for your selected package.
 - Payment Page: Secure payment processing for finalizing event bookings.
 
+## Technologies Used
+
+- Programming Language: Java
+
+- Development Environment: Android Studio
+
+- AI & Chatbot: OpenAI, Retrieval-Augmented Generation (RAG)
+
+- Backend: Firebase (Realtime Database, Authentication, Cloud Functions)
